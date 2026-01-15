@@ -1,0 +1,8 @@
+---
+applications:
+- name: todo-app
+  memory: 64M
+  instances: 1
+  buildpack: staticfile_buildpack
+  env:
+    FORCE_HTTPS: true

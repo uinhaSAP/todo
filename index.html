@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="current-date"></h1>
+            <div class="theme-toggle">
+                <span id="theme-text" class="theme-text">dark</span>
+            </div>
+        </header>
+        
+        <div class="columns">
+            <div class="column">
+                <h2>High</h2>
+                <div class="input-group">
+                    <input type="text" id="high-input" placeholder="Add high priority task..." class="task-input">
+                    <!-- <button onclick="addTask('high')" class="add-btn">+</button> -->
+                </div>
+                <ul id="high-list" class="task-list"></ul>
+            </div>
+            
+            <div class="column">
+                <h2>Medium</h2>
+                <div class="input-group">
+                    <input type="text" id="medium-input" placeholder="Add medium priority task..." class="task-input">
+                    <!-- <button onclick="addTask('medium')" class="add-btn">+</button> -->
+                </div>
+                <ul id="medium-list" class="task-list"></ul>
+            </div>
+            
+            <div class="column">
+                <h2>Low</h2>
+                <div class="input-group">
+                    <input type="text" id="low-input" placeholder="Add low priority task..." class="task-input">
+                    <!-- <button onclick="addTask('low')" class="add-btn">+</button> -->
+                </div>
+                <ul id="low-list" class="task-list"></ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal-overlay">
+        <div class="edit-card">
+            <h3>Edit Task</h3>
+            <textarea id="edit-task-text" placeholder="Task description..."></textarea>
+            <div class="priority-select">
+                <label for="edit-priority">Priority</label>
+                <select id="edit-priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+                <button onclick="saveEditedTask()">Save</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+body.dark-mode .task-input,
+body.dark-mode .edit-card textarea,
+body.dark-mode .edit-card select {
+    background-color: transparent;
+    color: #ffffff;
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .task-input:focus,
+body.dark-mode .edit-card textarea:focus,
+body.dark-mode .edit-card select:focus {
+    border-bottom-color: #ffffff;
+}
+
+body.dark-mode .task-input::placeholder {
+    color: #505050;
+}
+
+body.dark-mode .add-btn {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+body.dark-mode .add-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-mode .task-item {
+    border-bottom-color: #1a1a1a;
+}
+
+body.dark-mode .task-item.drag-over {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .checkbox {
+    border-color: #ffffff;
+}
+
+body.dark-mode .checkbox:hover {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .task-item.completed .checkbox {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+body.dark-mode .task-item.completed .checkbox::after {
+    color: #000000;
+}
+
+body.dark-mode .task-item.completed .task-text {
+    color: #505050;
+}
+
+body.dark-mode .edit-btn,
+body.dark-mode .delete-btn {
+    color: #666666;
+}
+
+body.dark-mode .edit-btn:hover,
+body.dark-mode .delete-btn:hover {
+    color: #ffffff;
+}
+
+body.dark-mode .modal-overlay {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .edit-card {
+    background-color: #000000;
+    border-color: #404040;
+}
+
+body.dark-mode .edit-card h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .edit-card .priority-select label {
+    color: #999999;
+}
+
+body.dark-mode .edit-card button {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+body.dark-mode .edit-card button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark-mode .edit-card button.cancel-btn {
+    border-color: #666666;
+    color: #666666;
+}
+
+body.dark-mode .edit-card button.cancel-btn:hover {
+    background-color: #666666;
+    color: #000000;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.theme-text {
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s ease;
+}
+
+.theme-text:hover {
+    opacity: 0.6;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.column {
+    padding: 0;
+    background-color: transparent;
+    min-height: 400px;
+}
+
+.column h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000000;
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.task-input {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #d0d0d0;
+    background-color: transparent;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+.task-input:focus {
+    outline: none;
+    border-bottom-color: #000000;
+}
+
+.task-input::placeholder {
+    color: #b0b0b0;
+}
+
+.add-btn {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.add-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+.task-list {
+    list-style: none;
+    padding: 0 0 40px 0;
+    margin: 0;
+    min-height: 200px;
+    transition: background-color 0.2s ease;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: move;
+}
+
+.task-item.dragging {
+    opacity: 0.3;
+}
+
+.task-item.drag-over {
+    background-color: #f5f5f5;
+}
+
+.task-item:last-child {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #000000;
+    border-radius: 50%;
+    margin-right: 12px;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.checkbox:hover {
+    background-color: #f5f5f5;
+}
+
+.task-item.completed .checkbox {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.task-item.completed .checkbox::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.task-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    font-weight: 400;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #b0b0b0;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.edit-btn,
+.delete-btn {
+    opacity: 0;
+    background: none;
+    border: none;
+    color: #999999;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.task-item:hover .edit-btn,
+.task-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    color: #000000;
+    transform: scale(1.1);
+}
+
+/* Edit Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.edit-card {
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.edit-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000000;
+}
+
+.edit-card textarea {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #d0d0d0;
+    background-color: transparent;
+    font-size: 0.95rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+}
+
+.edit-card textarea:focus {
+    outline: none;
+    border-bottom-color: #000000;
+}
+
+.edit-card .priority-select {
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.edit-card .priority-select label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    color: #666666;
+}
+
+.edit-card select {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #d0d0d0;
+    background-color: transparent;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.edit-card select:focus {
+    outline: none;
+    border-bottom-color: #000000;
+}
+
+.edit-card .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.edit-card button {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #000000;
+    background-color: transparent;
+    color: #000000;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-card button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.edit-card button.cancel-btn {
+    border-color: #999999;
+    color: #999999;
+}
+
+.edit-card button.cancel-btn:hover {
+    background-color: #999999;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .columns {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    header {
+        margin-bottom: 40px;
+    }
+    
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .columns {
+        gap: 45px;
+    }
+    
+    .column h2 {
+        font-size: 1rem;
+    }
+    
+    .task-input {
+        font-size: 0.85rem;
+    }
+    
+    .add-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .columns {
+        gap: 40px;
+    }
+    
+    .column h2 {
+        font-size: 0.95rem;
+    }
+    
+    .task-text {
+        font-size: 0.85rem;
+    }
+    
+    .checkbox {
+        width: 16px;
+        height: 16px;
+    }
+}

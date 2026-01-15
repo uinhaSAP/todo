@@ -1,0 +1,37 @@
+# Version control
+.git/
+.gitignore
+
+# Node modules (will be installed during staging)
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Documentation
+README.md
+*.md
+
+# Logs
+logs/
+*.log
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
